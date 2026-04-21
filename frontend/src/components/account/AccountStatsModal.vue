@@ -445,7 +445,7 @@
         </div>
 
         <!-- Model Distribution -->
-        <ModelDistributionChart :model-stats="stats.models" :loading="false" />
+        <ModelDistributionChart :model-stats="stats.models" :loading="false" :show-standard-column="false" />
 
         <EndpointDistributionChart
           :endpoint-stats="stats.endpoints || []"
