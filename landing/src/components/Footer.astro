@@ -1,0 +1,21 @@
+---
+interface Props {
+  copyright: string
+  docsLabel: string
+  loginLabel: string
+  languageLabel: string
+  languageHref: string
+  docsUrl: string
+}
+
+const { copyright, docsLabel, loginLabel, languageLabel, languageHref, docsUrl } = Astro.props
+---
+
+<footer class="footer shell">
+  <div class="footer__brand">{copyright}</div>
+  <nav class="footer__links" aria-label="Footer">
+    <a href={docsUrl} target="_blank" rel="noreferrer">{docsLabel}</a>
+    <a href="https://codexone.aieania.tech/dashboard" target="_blank" rel="noreferrer">{loginLabel}</a>
+    <a href={languageHref}>{languageLabel}</a>
+  </nav>
+</footer>

@@ -1,0 +1,308 @@
+---
+import Footer from '../components/Footer.astro'
+import LandingLayout from '../layouts/LandingLayout.astro'
+import { zhContent } from '../content/zh'
+import '../styles/global.css'
+
+const site = Astro.site?.toString().replace(/\/$/, '') || 'https://codex.aieania.tech'
+const docsUrl = import.meta.env.LANDING_DOC_URL || 'https://ycn7ag875ygs.feishu.cn/wiki/DWFwwmvdHi11kEkAd2NcPYUEn4D'
+const appBaseUrl = 'https://codexone.aieania.tech'
+const appDashboardUrl = `${appBaseUrl}/dashboard`
+const content = zhContent
+const canonical = `${site}${content.path}`
+const ogImage = `${site}/og/zh.svg`
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: content.faq.items.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer
+    }
+  }))
+}
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'CodexOne',
+  serviceType: 'GPT model API service',
+  areaServed: 'CN',
+  brand: {
+    '@type': 'Brand',
+    name: 'CodexOne'
+  },
+  description: content.description,
+  provider: {
+    '@type': 'Organization',
+    name: 'CodexOne',
+    url: site
+  }
+}
+---
+
+<LandingLayout
+  lang={content.lang}
+  title={content.title}
+  description={content.description}
+  canonical={canonical}
+  ogTitle={content.ogTitle}
+  ogDescription={content.ogDescription}
+  ogImage={ogImage}
+  alternates={[
+    { hreflang: 'zh-CN', href: `${site}/` },
+    { hreflang: 'en', href: `${site}/en` },
+    { hreflang: 'x-default', href: `${site}/` }
+  ]}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+  </Fragment>
+
+  <header class="navbar">
+    <div class="shell navbar__inner">
+      <a class="brand" href="/">
+        <span class="brand__mark"></span>
+        <span>CodexOne</span>
+      </a>
+      <nav class="navbar__links" aria-label="Primary">
+        <a href="#models">{content.navigation.models}</a>
+        <a href="#pricing">{content.navigation.pricing}</a>
+        <a href="#faq">{content.navigation.faq}</a>
+        <a href={docsUrl} target="_blank" rel="noreferrer">{content.navigation.docs}</a>
+      </nav>
+      <div class="navbar__actions">
+        <a class="locale-switch" href="/en">English</a>
+        <a class="button button--ghost" href={appDashboardUrl} target="_blank" rel="noreferrer">{content.navigation.login}</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="shell hero__inner">
+        <div class="hero__copy">
+          <span class="hero__eyebrow">{content.hero.eyebrow}</span>
+          <h1>{content.hero.heading}</h1>
+          <p class="hero__subheading">{content.hero.subheading}</p>
+          <p class="hero__supporting">{content.hero.supportingLine}</p>
+          <div class="hero__actions">
+            <a class="button button--primary" href={appDashboardUrl} target="_blank" rel="noreferrer">{content.hero.primaryCta}</a>
+            <a class="button button--secondary" href="#pricing">{content.hero.secondaryCta}</a>
+            <a class="button button--ghost" href={docsUrl} target="_blank" rel="noreferrer">{content.hero.docsCta}</a>
+          </div>
+          <div class="hero__meta" aria-label="核心信息">
+            <div class="hero__meta-card">
+              <strong>1 RMB = 6 USD</strong>
+              <span>公开透明充值比例，适合快速核算 GPT 调用成本。</span>
+            </div>
+            <div class="hero__meta-card">
+              <strong>1 / 1.3 / 1.6</strong>
+              <span>低速、普通、高速三档倍率，按业务时延与命中需求选择。</span>
+            </div>
+            <div class="hero__meta-card">
+              <strong>国内直连</strong>
+              <span>无需梯子即可访问，适配团队接入、开发测试与生产调用。</span>
+            </div>
+          </div>
+          <div class="hero__tags">
+            {content.hero.tags.map((tag) => <span class="pill">{tag.label}</span>)}
+          </div>
+        </div>
+        <div class="hero__visual" aria-hidden="true">
+          <div class="hero__glow"></div>
+          <div class="visual-grid">
+            <div class="floating-card">
+              <span class="floating-card__label">Model Access</span>
+              <strong>GPT-5.5</strong>
+              <p>高质量文本生成与复杂任务处理，面向真实业务接入。</p>
+            </div>
+            <div class="floating-card">
+              <span class="floating-card__label">Code Flow</span>
+              <strong>GPT-5.3 Codex</strong>
+              <p>面向代码生成、重构与自动化开发工作流。</p>
+            </div>
+            <div class="floating-card floating-card--wide">
+              <span class="floating-card__label">Speed Tiers</span>
+              <strong>1 / 1.3 / 1.6</strong>
+              <p>透明倍率，按业务选择低速、普通或高速档位。</p>
+            </div>
+            <div class="floating-card">
+              <span class="floating-card__label">Image</span>
+              <strong>GPT-Image-2</strong>
+              <p>用于视觉创作、素材生成与图像生产工作流。</p>
+            </div>
+            <div class="floating-card">
+              <span class="floating-card__label">Deep Research</span>
+              <strong>GPT-5.5 Pro</strong>
+              <p>适合长链路分析、复杂任务拆解与研究型输出。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="shell highlight-strip">
+        {content.highlights.map((item) => <span class="pill">{item}</span>)}
+      </div>
+    </section>
+
+    <section class="section" id="models">
+      <div class="shell">
+        <div class="section__header">
+          <span class="section__eyebrow">Models</span>
+          <h2>{content.models.title}</h2>
+          <p class="lead">{content.models.subtitle}</p>
+        </div>
+        <div class="grid grid--models">
+          {content.models.items.map((item) => (
+            <article class="card">
+              <span class="card__eyebrow">{item.name}</span>
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="pricing">
+      <div class="shell">
+        <div class="section__header">
+          <span class="section__eyebrow">Pricing</span>
+          <h2>{content.pricing.title}</h2>
+          <p class="lead">{content.pricing.subtitle}</p>
+        </div>
+        <div class="rate-banner">{content.pricing.rechargeRate}</div>
+        <div class="grid grid--pricing" style="margin-top: 1.5rem;">
+          {content.pricing.items.map((item) => (
+            <article class:list={['card', item.recommended && 'card--recommended']}>
+              {item.recommended && <span class="card__badge">推荐</span>}
+              <span class="card__eyebrow">{item.name}</span>
+              <h3>{item.multiplier}</h3>
+              <ul>
+                {item.points.map((point) => <li>{point}</li>)}
+              </ul>
+            </article>
+          ))}
+        </div>
+        <p class="lead" style="margin-top: 1.25rem;">{content.pricing.footnote}</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell">
+        <div class="section__header">
+          <span class="section__eyebrow">Why CodexOne</span>
+          <h2>{content.features.title}</h2>
+          <p class="lead">{content.features.subtitle}</p>
+        </div>
+        <div class="grid grid--features">
+          {content.features.items.map((item) => (
+            <article class="card">
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell">
+        <div class="section__header">
+          <span class="section__eyebrow">Use Cases</span>
+          <h2>{content.useCases.title}</h2>
+          <p class="lead">{content.useCases.subtitle}</p>
+        </div>
+        <div class="grid grid--cases">
+          {content.useCases.items.map((item) => (
+            <article class="card">
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell integration-panel">
+        <div>
+          <span class="section__eyebrow">Integrate Fast</span>
+          <h2>{content.integration.title}</h2>
+          <p class="lead">{content.integration.subtitle}</p>
+          <ul>
+            {content.integration.bullets.map((bullet) => <li>{bullet}</li>)}
+          </ul>
+          <div class="hero__actions" style="margin-top: 1.5rem;">
+            <a class="button button--primary" href={appDashboardUrl} target="_blank" rel="noreferrer">{content.integration.primaryCta}</a>
+            <a class="button button--secondary" href={docsUrl} target="_blank" rel="noreferrer">{content.integration.docsCta}</a>
+          </div>
+        </div>
+        <div class="integration-flow" aria-hidden="true">
+          <div class="integration-step"><strong>1.</strong> 登录进入控制台</div>
+          <div class="integration-step"><strong>2.</strong> 选择模型与速度档位</div>
+          <div class="integration-step"><strong>3.</strong> 查看文档与调用方式</div>
+          <div class="integration-step"><strong>4.</strong> 接入业务与生产工作流</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="shell">
+        <div class="section__header">
+          <span class="section__eyebrow">FAQ</span>
+          <h2>{content.faq.title}</h2>
+        </div>
+        <div class="faq-list">
+          {content.faq.items.map((item) => (
+            <details class="faq-item">
+              <summary>{item.question}</summary>
+              <p>{item.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell">
+        <div class="section__header">
+          <span class="section__eyebrow">Trust</span>
+          <h2>{content.trust.title}</h2>
+          <p class="lead">{content.trust.subtitle}</p>
+        </div>
+        <div class="placeholder-grid">
+          {content.trust.placeholders.map((item) => (
+            <article class="placeholder-card">
+              <h3>{item}</h3>
+              <p>内容后续补充，用于展示业务规模、性能数据与客户验证信息。</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell cta-banner">
+        <span class="section__eyebrow">Launch Your Workflow</span>
+        <h2>{content.bottomCta.title}</h2>
+        <p class="lead">{content.bottomCta.subtitle}</p>
+        <div class="cta-banner__actions">
+          <a class="button button--primary" href={appDashboardUrl} target="_blank" rel="noreferrer">{content.bottomCta.primaryCta}</a>
+          <a class="button button--secondary" href={docsUrl} target="_blank" rel="noreferrer">{content.bottomCta.docsCta}</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer
+    copyright={content.footer.copyright}
+    docsLabel={content.footer.docs}
+    loginLabel={content.footer.login}
+    languageLabel={content.footer.languageSwitch}
+    languageHref="/en"
+    docsUrl={docsUrl}
+  />
+</LandingLayout>

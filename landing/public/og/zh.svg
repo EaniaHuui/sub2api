@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" rx="40" fill="#070B16"/>
+  <circle cx="1060" cy="110" r="220" fill="url(#paint0_radial_1_2)" fill-opacity="0.8"/>
+  <circle cx="160" cy="90" r="180" fill="url(#paint1_radial_1_2)" fill-opacity="0.65"/>
+  <text x="88" y="176" fill="#A5F3FC" font-family="Inter, Arial, sans-serif" font-size="34" letter-spacing="7">CODEXONE</text>
+  <text x="88" y="276" fill="#F8FBFF" font-family="Inter, Arial, sans-serif" font-size="68" font-weight="700">国内直连的 GPT</text>
+  <text x="88" y="350" fill="#F8FBFF" font-family="Inter, Arial, sans-serif" font-size="68" font-weight="700">模型 API 服务</text>
+  <text x="88" y="430" fill="#C8D7F1" font-family="Inter, Arial, sans-serif" font-size="30">GPT-only · 三档速度 · 透明倍率 · 生产环境可用</text>
+  <rect x="88" y="490" width="300" height="56" rx="28" fill="url(#paint2_linear_1_2)"/>
+  <text x="132" y="527" fill="#F8FBFF" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="700">1 RMB = 6 USD</text>
+  <defs>
+    <radialGradient id="paint0_radial_1_2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1060 110) rotate(90) scale(220)">
+      <stop stop-color="#7C3AED"/>
+      <stop offset="1" stop-color="#7C3AED" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="paint1_radial_1_2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(160 90) rotate(90) scale(180)">
+      <stop stop-color="#22D3EE"/>
+      <stop offset="1" stop-color="#22D3EE" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="paint2_linear_1_2" x1="88" y1="490" x2="388" y2="546" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#22D3EE"/>
+      <stop offset="1" stop-color="#6366F1"/>
+    </linearGradient>
+  </defs>
+</svg>

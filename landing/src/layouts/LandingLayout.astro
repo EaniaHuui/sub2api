@@ -1,0 +1,55 @@
+---
+interface AlternateLink {
+  hreflang: string
+  href: string
+}
+
+interface Props {
+  lang: string
+  title: string
+  description: string
+  canonical: string
+  ogTitle: string
+  ogDescription: string
+  ogImage: string
+  alternates: AlternateLink[]
+}
+
+const {
+  lang,
+  title,
+  description,
+  canonical,
+  ogTitle,
+  ogDescription,
+  ogImage,
+  alternates
+} = Astro.props
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {alternates.map((alternate) => <link rel="alternate" hreflang={alternate.hreflang} href={alternate.href} />)}
+    <meta name="theme-color" content="#070b16" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={ogDescription} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={ogTitle} />
+    <meta name="twitter:description" content={ogDescription} />
+    <meta name="twitter:image" content={ogImage} />
+    <link rel="icon" type="image/png" href="/brand-icon.png" />
+    <slot name="head" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
