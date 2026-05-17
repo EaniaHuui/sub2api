@@ -28,6 +28,32 @@ api.sub2api.com {
 	}
 
 	# =========================================================================
+	# CodexOne landing 同域分流（如启用独立 landing）
+	# 静态目录示例：/var/www/codexone-landing/dist
+	# =========================================================================
+	@legacyHome path /home
+	redir @legacyHome / 301
+
+	@landingRoot path /
+	handle @landingRoot {
+		root * /var/www/codexone-landing/dist
+		file_server
+	}
+
+	@landingEn path /en
+	handle @landingEn {
+		rewrite * /en/index.html
+		root * /var/www/codexone-landing/dist
+		file_server
+	}
+
+	@landingStatic path /assets/* /og/* /favicon.svg /robots.txt /sitemap-index.xml /sitemap-0.xml
+	handle @landingStatic {
+		root * /var/www/codexone-landing/dist
+		file_server
+	}
+
+	# =========================================================================
 	# 反向代理配置
 	# =========================================================================
 	reverse_proxy localhost:8080 {
