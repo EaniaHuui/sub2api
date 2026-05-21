@@ -122,6 +122,24 @@ const discountText = computed(() => {
   return pct > 0 ? `-${pct}%` : ''
 })
 
+const rateDisplay = computed(() => {
+  const rate = props.plan.rate_multiplier ?? 1
+  return `×${Number(rate.toPrecision(10))}`
+})
+
+const MODEL_SCOPE_LABELS: Record<string, string> = {
+  claude: 'Claude',
+  gemini_text: 'Gemini',
+  gemini_image: 'Imagen',
+}
+
+const modelScopeLabels = computed(() => {
+  if (platform.value !== 'antigravity') return []
+  const scopes = props.plan.supported_model_scopes
+  if (!scopes || scopes.length === 0) return []
+  return scopes.map(s => MODEL_SCOPE_LABELS[s] || s)
+})
+
 const validitySuffix = computed(() => {
   const u = props.plan.validity_unit || 'day'
   if (u === 'month') return t('payment.perMonth')
