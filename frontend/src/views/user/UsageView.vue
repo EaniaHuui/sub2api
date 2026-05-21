@@ -490,7 +490,7 @@
             </template>
             <div v-else class="flex items-center justify-between gap-4">
               <span class="text-gray-400">{{ t('usage.unitPrice') }}</span>
-              <span class="font-medium text-sky-300">${{ ((tooltipData.total_cost ?? 0) * (tooltipData.rate_multiplier || 1)).toFixed(6) }}</span>
+              <span class="font-medium text-sky-300">${{ ((tooltipData?.total_cost ?? 0) * (tooltipData?.rate_multiplier || 1)).toFixed(6) }}</span>
             </div>
             <div v-if="tooltipData && tooltipData.cache_creation_cost > 0" class="flex items-center justify-between gap-4">
               <span class="text-gray-400">{{ t('admin.usage.cacheCreationCost') }}</span>

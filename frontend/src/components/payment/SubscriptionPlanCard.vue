@@ -19,6 +19,12 @@
             <span :class="['shrink-0 rounded-full px-2 py-0.5 text-[11px] font-medium', badgeLightClass]">
               {{ pLabel }}
             </span>
+            <span v-if="platform === 'antigravity' && modelScopeLabels.length > 0" class="shrink-0 rounded-full bg-indigo-100 px-2 py-0.5 text-[10px] font-medium text-indigo-600 dark:bg-indigo-900/50 dark:text-indigo-400">
+              {{ modelScopeLabels.join(' / ') }}
+            </span>
+          </div>
+          <div v-if="platform === 'antigravity' && rateDisplay !== '×1'" class="mt-0.5 text-xs text-indigo-600 dark:text-indigo-400 font-medium">
+            {{ rateDisplay }}
           </div>
           <p v-if="plan.description" class="mt-0.5 text-xs leading-relaxed text-gray-500 dark:text-dark-400 line-clamp-2">
             {{ plan.description }}
